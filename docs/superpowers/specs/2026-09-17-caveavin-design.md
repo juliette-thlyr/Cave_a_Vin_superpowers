@@ -46,6 +46,7 @@ Il n'existe pas de base de données gratuite et fiable couvrant cépage/appellat
   - fenêtre de dégustation optimale suggérée (modifiable manuellement)
   - accords mets-vin suggérés (saisis manuellement ou recopiés depuis une recherche)
   - source des informations (`manuelle` ou `recherche assistée`)
+  - photo de la bouteille/étiquette (optionnelle), partagée par toutes les bouteilles identiques
 - **BottleInstance** — une bouteille physique, liée à un `Wine` :
   - mode d'acquisition (achat, cadeau, héritage, gagnée, autre)
   - lieu / source d'acquisition
@@ -64,7 +65,7 @@ Il n'existe pas de base de données gratuite et fiable couvrant cépage/appellat
 ## Parcours utilisateur clés
 
 - **Tableau de bord** : vue d'ensemble de la cave (nombre de bouteilles, valeur totale estimée) et liste des bouteilles "à boire bientôt" (fenêtre de dégustation optimale proche ou dépassée).
-- **Ajouter une ou plusieurs bouteilles** : formulaire avec les informations du vin et de l'acquisition (mode, lieu, prix, date). Un champ "quantité" détermine combien de `BottleInstance` sont créées (il n'est pas stocké en tant que tel : chaque bouteille physique reste une ligne distincte). Bouton "rechercher sur internet" ouvrant un onglet pré-rempli.
+- **Ajouter une ou plusieurs bouteilles** : formulaire avec les informations du vin et de l'acquisition (mode, lieu, prix, date), et une photo facultative de la bouteille/étiquette. Un champ "quantité" détermine combien de `BottleInstance` sont créées (il n'est pas stocké en tant que tel : chaque bouteille physique reste une ligne distincte). Bouton "rechercher sur internet" ouvrant un onglet pré-rempli.
 - **Consulter/filtrer la cave** : liste des bouteilles en cave, filtrable par cépage, région, millésime, statut.
 - **Fiche bouteille** : informations du `Wine` et de la `BottleInstance`, historique de dégustation d'un vin similaire déjà goûté le cas échéant.
 - **Déguster une bouteille** : depuis la fiche bouteille, action "j'ai bu cette bouteille" ouvrant le formulaire de dégustation et basculant le statut en `consommée`.
