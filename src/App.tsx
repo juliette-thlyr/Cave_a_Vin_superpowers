@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
+import { AddBottlePage } from './pages/AddBottlePage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
@@ -13,6 +14,14 @@ function App() {
             <div className="min-h-screen bg-white p-4">
               <h1 className="text-2xl font-bold">CaveAVin</h1>
             </div>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add-bottle"
+        element={
+          <ProtectedRoute>
+            <AddBottlePage />
           </ProtectedRoute>
         }
       />
