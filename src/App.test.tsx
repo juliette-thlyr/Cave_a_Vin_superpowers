@@ -12,6 +12,10 @@ vi.mock('./supabaseClient', () => ({
   },
 }));
 
+vi.mock('./repositories/bottleRepository', () => ({
+  createSupabaseBottleRepository: () => ({ listBottles: vi.fn().mockResolvedValue([]) }),
+}));
+
 test('renders the CaveAVin title when authenticated', async () => {
   render(
     <MemoryRouter initialEntries={['/']}>
