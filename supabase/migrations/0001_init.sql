@@ -55,3 +55,10 @@ create policy "Users manage their own tastings" on tasting_records
 
 insert into storage.buckets (id, name, public) values ('photos', 'photos', true)
   on conflict (id) do nothing;
+
+create policy "Users upload their own photos" on storage.objects
+  for insert to authenticated with check (bucket_id = 'photos');
+create policy "Users manage their own photos" on storage.objects
+  for update to authenticated using (bucket_id = 'photos' and owner = auth.uid());
+create policy "Users delete their own photos" on storage.objects
+  for delete to authenticated using (bucket_id = 'photos' and owner = auth.uid());
