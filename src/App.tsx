@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { AddBottlePage } from './pages/AddBottlePage';
 import { DashboardPage } from './pages/DashboardPage';
+import { CellarListPage } from './pages/CellarListPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
@@ -21,6 +22,14 @@ function App() {
         element={
           <ProtectedRoute>
             <AddBottlePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/cellar"
+        element={
+          <ProtectedRoute>
+            <CellarListPage />
           </ProtectedRoute>
         }
       />
