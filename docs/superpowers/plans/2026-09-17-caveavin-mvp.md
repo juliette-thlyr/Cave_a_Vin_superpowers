@@ -188,7 +188,7 @@ This step needs your own Supabase account — go to https://supabase.com, create
 ```sql
 create table wines (
   id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users(id) on delete cascade,
+  user_id uuid not null default auth.uid() references auth.users(id) on delete cascade,
   name text not null,
   producer text,
   vintage integer,
@@ -206,7 +206,7 @@ create table wines (
 create table bottle_instances (
   id uuid primary key default gen_random_uuid(),
   wine_id uuid not null references wines(id) on delete cascade,
-  user_id uuid not null references auth.users(id) on delete cascade,
+  user_id uuid not null default auth.uid() references auth.users(id) on delete cascade,
   acquisition_mode text not null check (acquisition_mode in ('achat','cadeau','heritage','gagnee','autre')),
   acquisition_source text,
   price_paid numeric(10,2),
@@ -218,7 +218,7 @@ create table bottle_instances (
 create table tasting_records (
   id uuid primary key default gen_random_uuid(),
   bottle_instance_id uuid not null references bottle_instances(id) on delete cascade,
-  user_id uuid not null references auth.users(id) on delete cascade,
+  user_id uuid not null default auth.uid() references auth.users(id) on delete cascade,
   rating integer check (rating between 0 and 100),
   notes text,
   tasted_at date not null,
