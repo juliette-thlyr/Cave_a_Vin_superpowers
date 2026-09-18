@@ -4,6 +4,8 @@ import { AddBottlePage } from './pages/AddBottlePage';
 import { DashboardPage } from './pages/DashboardPage';
 import { CellarListPage } from './pages/CellarListPage';
 import { BottleDetailPage } from './pages/BottleDetailPage';
+import { TastingFormPage } from './pages/TastingFormPage';
+import { TastingHistoryPage } from './pages/TastingHistoryPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
@@ -39,6 +41,22 @@ function App() {
         element={
           <ProtectedRoute>
             <BottleDetailPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/bottles/:id/taste"
+        element={
+          <ProtectedRoute>
+            <TastingFormPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/history"
+        element={
+          <ProtectedRoute>
+            <TastingHistoryPage />
           </ProtectedRoute>
         }
       />
