@@ -3,6 +3,7 @@ import { LoginPage } from './pages/LoginPage';
 import { AddBottlePage } from './pages/AddBottlePage';
 import { DashboardPage } from './pages/DashboardPage';
 import { CellarListPage } from './pages/CellarListPage';
+import { BottleDetailPage } from './pages/BottleDetailPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
@@ -30,6 +31,14 @@ function App() {
         element={
           <ProtectedRoute>
             <CellarListPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/bottles/:id"
+        element={
+          <ProtectedRoute>
+            <BottleDetailPage />
           </ProtectedRoute>
         }
       />
