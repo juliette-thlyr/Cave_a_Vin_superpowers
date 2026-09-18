@@ -7,6 +7,16 @@ import { BottleDetailPage } from './pages/BottleDetailPage';
 import { TastingFormPage } from './pages/TastingFormPage';
 import { TastingHistoryPage } from './pages/TastingHistoryPage';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { NavBar } from './components/NavBar';
+
+function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <ProtectedRoute>
+      <NavBar />
+      {children}
+    </ProtectedRoute>
+  );
+}
 
 function App() {
   return (
@@ -15,49 +25,49 @@ function App() {
       <Route
         path="/"
         element={
-          <ProtectedRoute>
+          <AuthenticatedLayout>
             <DashboardPage />
-          </ProtectedRoute>
+          </AuthenticatedLayout>
         }
       />
       <Route
         path="/add-bottle"
         element={
-          <ProtectedRoute>
+          <AuthenticatedLayout>
             <AddBottlePage />
-          </ProtectedRoute>
+          </AuthenticatedLayout>
         }
       />
       <Route
         path="/cellar"
         element={
-          <ProtectedRoute>
+          <AuthenticatedLayout>
             <CellarListPage />
-          </ProtectedRoute>
+          </AuthenticatedLayout>
         }
       />
       <Route
         path="/bottles/:id"
         element={
-          <ProtectedRoute>
+          <AuthenticatedLayout>
             <BottleDetailPage />
-          </ProtectedRoute>
+          </AuthenticatedLayout>
         }
       />
       <Route
         path="/bottles/:id/taste"
         element={
-          <ProtectedRoute>
+          <AuthenticatedLayout>
             <TastingFormPage />
-          </ProtectedRoute>
+          </AuthenticatedLayout>
         }
       />
       <Route
         path="/history"
         element={
-          <ProtectedRoute>
+          <AuthenticatedLayout>
             <TastingHistoryPage />
-          </ProtectedRoute>
+          </AuthenticatedLayout>
         }
       />
     </Routes>

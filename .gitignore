@@ -25,3 +25,4 @@ dist-ssr
 *.sw?
 *.tsbuildinfo
 vite.config.d.ts
+vite.config.js
