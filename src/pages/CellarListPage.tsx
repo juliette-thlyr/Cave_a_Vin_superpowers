@@ -11,10 +11,14 @@ export function CellarListPage() {
   const [region, setRegion] = useState('');
   const [grapeVariety, setGrapeVariety] = useState('');
   const [vintage, setVintage] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const repo = createSupabaseBottleRepository(supabase);
-    repo.listBottles({ status: 'en_cave' }).then(setBottles);
+    repo
+      .listBottles({ status: 'en_cave' })
+      .then(setBottles)
+      .catch((err) => setError(err instanceof Error ? err.message : 'Erreur de chargement'));
   }, []);
 
   const filtered = bottles.filter((b) => {
@@ -27,6 +31,7 @@ export function CellarListPage() {
   return (
     <div className="max-w-lg mx-auto p-4 space-y-4">
       <h1 className="text-xl font-bold">Ma cave</h1>
+      {error && <p className="text-red-600 text-sm">{error}</p>}
       <div className="flex gap-2">
         <label>
           Region

@@ -35,3 +35,15 @@ test('shows bottle count, total value, and drink-soon bottles', async () => {
   expect(screen.getByText('Chateau X')).toBeInTheDocument();
   expect(screen.queryByText('Chateau Y')).not.toBeInTheDocument();
 });
+
+test('shows an error message when loading bottles fails', async () => {
+  listBottles.mockRejectedValueOnce(new Error('Network down'));
+
+  render(
+    <MemoryRouter>
+      <DashboardPage today={new Date(2026, 0, 1)} />
+    </MemoryRouter>
+  );
+
+  expect(await screen.findByText('Network down')).toBeInTheDocument();
+});

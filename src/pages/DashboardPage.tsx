@@ -9,10 +9,14 @@ type BottleWithWine = BottleInstance & { wine: Wine };
 
 export function DashboardPage({ today = new Date() }: { today?: Date }) {
   const [bottles, setBottles] = useState<BottleWithWine[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const repo = createSupabaseBottleRepository(supabase);
-    repo.listBottles({ status: 'en_cave' }).then(setBottles);
+    repo
+      .listBottles({ status: 'en_cave' })
+      .then(setBottles)
+      .catch((err) => setError(err instanceof Error ? err.message : 'Erreur de chargement'));
   }, []);
 
   const totalValue = bottles.reduce((sum, b) => sum + (b.pricePaid ?? 0), 0);
@@ -26,6 +30,7 @@ export function DashboardPage({ today = new Date() }: { today?: Date }) {
       <Link to="/add-bottle" className="inline-block bg-blue-600 text-white rounded p-2">
         Ajouter une bouteille
       </Link>
+      {error && <p className="text-red-600 text-sm">{error}</p>}
       <p>{bottles.length} bouteilles en cave, valeur estimee {totalValue} EUR</p>
       <div>
         <h2 className="font-semibold">A boire bientot</h2>

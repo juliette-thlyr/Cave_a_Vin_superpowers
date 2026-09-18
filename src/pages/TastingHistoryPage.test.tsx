@@ -24,3 +24,15 @@ test('lists tastings sorted by rating descending', async () => {
   expect(items[0]).toHaveTextContent('Domaine Y');
   expect(items[1]).toHaveTextContent('Chateau X');
 });
+
+test('shows an error message when loading tastings fails', async () => {
+  listTastingRecords.mockRejectedValueOnce(new Error('Network down'));
+
+  render(
+    <MemoryRouter>
+      <TastingHistoryPage />
+    </MemoryRouter>
+  );
+
+  expect(await screen.findByText('Network down')).toBeInTheDocument();
+});

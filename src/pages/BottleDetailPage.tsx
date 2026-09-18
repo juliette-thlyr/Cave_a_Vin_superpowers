@@ -9,13 +9,18 @@ type BottleWithWine = BottleInstance & { wine: Wine };
 export function BottleDetailPage() {
   const { id } = useParams<{ id: string }>();
   const [bottle, setBottle] = useState<BottleWithWine | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!id) return;
     const repo = createSupabaseBottleRepository(supabase);
-    repo.getBottle(id).then(setBottle);
+    repo
+      .getBottle(id)
+      .then(setBottle)
+      .catch((err) => setError(err instanceof Error ? err.message : 'Erreur de chargement'));
   }, [id]);
 
+  if (error) return <p className="p-4 text-red-600 text-sm">{error}</p>;
   if (!bottle) return <p className="p-4">Chargement...</p>;
 
   return (

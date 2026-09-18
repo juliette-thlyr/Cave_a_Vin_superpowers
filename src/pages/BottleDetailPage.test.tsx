@@ -31,3 +31,17 @@ test('shows the wine and acquisition details, and a tasting action link', async 
   expect(screen.getByText(/Caviste/)).toBeInTheDocument();
   expect(screen.getByRole('link', { name: /j'ai bu cette bouteille/i })).toHaveAttribute('href', '/bottles/b1/taste');
 });
+
+test('shows an error message when loading the bottle fails', async () => {
+  getBottle.mockRejectedValueOnce(new Error('Bottle not found'));
+
+  render(
+    <MemoryRouter initialEntries={['/bottles/b1']}>
+      <Routes>
+        <Route path="/bottles/:id" element={<BottleDetailPage />} />
+      </Routes>
+    </MemoryRouter>
+  );
+
+  expect(await screen.findByText('Bottle not found')).toBeInTheDocument();
+});

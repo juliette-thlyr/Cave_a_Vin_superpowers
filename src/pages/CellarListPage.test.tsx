@@ -28,3 +28,15 @@ test('filters the cellar list by region', async () => {
   expect(screen.getByText('Chateau X')).toBeInTheDocument();
   expect(screen.queryByText('Domaine Y')).not.toBeInTheDocument();
 });
+
+test('shows an error message when loading the cellar fails', async () => {
+  listBottles.mockRejectedValueOnce(new Error('Network down'));
+
+  render(
+    <MemoryRouter>
+      <CellarListPage />
+    </MemoryRouter>
+  );
+
+  expect(await screen.findByText('Network down')).toBeInTheDocument();
+});

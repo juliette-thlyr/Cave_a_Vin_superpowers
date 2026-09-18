@@ -19,3 +19,12 @@ test('starts with no user and loading false after session check', async () => {
   await waitFor(() => expect(result.current.loading).toBe(false));
   expect(result.current.user).toBeNull();
 });
+
+test('stops loading even when the session check rejects', async () => {
+  const { supabase } = await import('../supabaseClient');
+  vi.mocked(supabase.auth.getSession).mockRejectedValueOnce(new Error('Network down'));
+
+  const { result } = renderHook(() => useAuth());
+  await waitFor(() => expect(result.current.loading).toBe(false));
+  expect(result.current.user).toBeNull();
+});
